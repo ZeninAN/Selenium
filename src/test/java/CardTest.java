@@ -91,4 +91,14 @@ public class CardTest {
         String expected = "Поле обязательно для заполнения";
         assertEquals(expected, actualText.trim());
     }
+    @Test
+    public void shouldSendForm5() {
+        driver.get("http://localhost:9999");
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Андрей Корчаков");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79994702121");
+        driver.findElement(By.cssSelector("button")).click();
+        String actualText = driver.findElement(By.cssSelector("[data-test-id='agreement'].checkbox .checkbox__text")).getText();
+        String expected = "Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй";
+        assertEquals(expected, actualText.trim());
+    }
 }
