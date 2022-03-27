@@ -25,13 +25,15 @@ public class CardTest {
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
     }
+
     @AfterEach
-    public void tearDown(){
+    public void tearDown() {
         driver.quit();
         driver = null;
     }
+
     @Test
-    public void shouldSendForm(){
+    public void shouldSendForm() {
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Андрей Корчаков");
         driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79994702121");
@@ -39,8 +41,9 @@ public class CardTest {
         driver.findElement(By.cssSelector("button")).click();
         String actualText = driver.findElement(By.cssSelector("[data-test-id='order-success'].paragraph")).getText();
         String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        assertEquals(expected,actualText.trim());
+        assertEquals(expected, actualText.trim());
     }
+
     @Test
     void test() {
         driver.get("http://localhost:9999");
@@ -52,6 +55,7 @@ public class CardTest {
         String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
         Assertions.assertEquals(expected, actualText.trim());
     }
+
     @Test
     public void shouldSendForm2() {
         driver.get("http://localhost:9999");
@@ -63,6 +67,7 @@ public class CardTest {
         String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
         assertEquals(expected, actualText);
     }
+
     @Test
     public void shouldSendForm3() {
         driver.get("http://localhost:9999");
@@ -74,8 +79,9 @@ public class CardTest {
         String expected = "Поле обязательно для заполнения";
         Assertions.assertEquals(expected, actualText.trim());
     }
+
     @Test
-    public void shouldSendForm4(){
+    public void shouldSendForm4() {
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Андрей Корчаков");
         driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("");
@@ -83,6 +89,6 @@ public class CardTest {
         driver.findElement(By.cssSelector("button")).click();
         String actualText = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub")).getText();
         String expected = "Поле обязательно для заполнения";
-        assertEquals(expected,actualText.trim());
+        assertEquals(expected, actualText.trim());
     }
 }
